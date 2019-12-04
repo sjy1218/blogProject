@@ -70,6 +70,7 @@
 				<?php endforeach;?>
 				</tbody>
 			</table>
+			<?=$page?>
 		</div>
 
 

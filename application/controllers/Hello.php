@@ -10,6 +10,19 @@ class Hello extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->library('pagination');
+
+		$limit=3;
+		$offset=0;
+
+		$total_rows = $this->BlogModel->total_blog();
+		$config['base_url'] = 'http://localhost/Codeigniter3/hello';
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $limit;
+		$this->pagination->initialize($config);
+
+		$data['page'] = $this->pagination->create_links();
+
 		$data['result'] = $this->BlogModel->select_blog();
 		$this->load->view('/hello/hello_mypage',$data);
 	}
@@ -21,7 +34,6 @@ class Hello extends CI_Controller {
 
 	public function insert_writeForm()
 	{
-
 		$rdata['category'] = $this->input->post('category');
 		$rdata['title'] = $this->input->post('title');
 		$rdata['regdate'] = $this->input->post('regdate');

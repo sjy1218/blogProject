@@ -12,16 +12,19 @@ class BlogModel extends CI_Model {
 
 	public function select_blog()
 	{
-//		$sql="select id,regdate,title,category,content from blog";
-
 		$query = $this->db->select()->from('blog')->get();
 		$result = $query->result();
 		return $result;
 	}
+	function total_blog()
+	{
+		$query = $this->db->select()->from('blog')->get();
+		$row = $query->num_rows();
+		return $row;
+	}
 
 	public function insert_blog($data)
 	{
-
 		$category = $data['category'];
 		$title = $data['title'];
 		$regdate = $data['regdate'];
