@@ -43,8 +43,10 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 .col-md-offset-6">
+		<div class="col-md-6 .col-md-offset-6" style="display: inline-block">
 			<input type="text" class="form-control" width="30%" placeholder="검색">
+		</div>
+		<div class="col-md-6" style="display: inline-block">
 			<button class="btn btn-info" type="button" id="btn_write">글쓰기</button>
 		</div>
 
@@ -70,7 +72,9 @@
 				<?php endforeach;?>
 				</tbody>
 			</table>
-			<?=$page?>
+			<ul class="pagination">
+				<?=$page?>
+			</ul>
 		</div>
 
 

@@ -6,6 +6,7 @@ class Hello extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('BlogModel');
+		$this->load->library('session');
 	}
 
 	public function index()
@@ -13,17 +14,26 @@ class Hello extends CI_Controller {
 		$this->load->library('pagination');
 
 		$limit=3;
-		$offset=0;
+		$offset = $this->session->userdata('offset');
+
+		if(empty($offset) == false) {
+			$offset = $this->session->userdata('offset');
+		}else{
+			$offset= 0;
+		}
 
 		$total_rows = $this->BlogModel->total_blog();
-		$config['base_url'] = 'http://localhost/Codeigniter3/hello';
-		$config['total_rows'] = $total_rows;
-		$config['per_page'] = $limit;
-		$this->pagination->initialize($config);
 
+		$config['base_url'] = 'http://localhost/Codeigniter3/hello/offset_blog';
+		$config['total_rows'] =  $total_rows;
+		$config['per_page'] = $limit;
+		$config['cur_page'] = $offset;
+		$config['uri_segment'] = 3;
+
+		$this->pagination->initialize($config);
 		$data['page'] = $this->pagination->create_links();
 
-		$data['result'] = $this->BlogModel->select_blog();
+		$data['result'] = $this->BlogModel->select_blog($limit,$offset);
 		$this->load->view('/hello/hello_mypage',$data);
 	}
 
@@ -46,6 +56,20 @@ class Hello extends CI_Controller {
 			echo "업로드 하였습니다";
 		}
 
+	}
+
+	function limit_blog($limit = 3, $offset=0){
+		$data['limit'] = $this->input->post('limit');
+		$data['offset'] = $offset;
+		$this->session->set_userdata($data);
+		$this->index();
+	}
+
+	function offset_blog($offset = 0)
+	{
+		$data['offset'] = $offset;
+		$this->session->set_userdata($data);
+		$this->index();
 	}
 
 }

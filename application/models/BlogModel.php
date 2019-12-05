@@ -10,9 +10,9 @@ class BlogModel extends CI_Model {
 
 	}
 
-	public function select_blog()
+	public function select_blog($limit,$offset)
 	{
-		$query = $this->db->select()->from('blog')->get();
+		$query = $this->db->get('blog',$limit,$offset);
 		$result = $query->result();
 		return $result;
 	}
