@@ -8,61 +8,32 @@
 			<button class="btn btn-info" type="button" id="btn_write">글쓰기</button>
 		</div>
 
-		<div class="col-md-12 .col-md-offset-6" id="content-blog">
-			<table class="table">
-				<thead>
-				<tr>
-					<th>카테고리</th>
-					<th>등록일</th>
-					<th>제목</th>
-					<th>내용</th>
-				</tr>
-				</thead>
-				<tbody>
-					{*<!--{@ row}-->
-					<tr class="tr_list" code="{row->id}">
-						<td>{row->category}</td>
-						<td>{row->regdate}</td>
-						<td>{row->title}</td>
-						<td>{row->content}</td>
-					</tr>
-					<!--{/}-->*}
-					<div id="content-blog"></div>
-				</tbody>
-			</table>
-			{page}
-
-		</div>
-
-
-	</div>
+        <div class="col-md-12 .col-md-offset-6" id="content-blog"></div>
+		{page}
 </div>
 
-
-
-
-<div id="content-placeholder"></div>
-<script id="some-template" type="text/x-handlebars-template">
-	{[#with person]}
-{[firstname]} {[lastname]}
-{[/with]}
-</script>
-
 <script id="blog-template" type="text/x-handlebars-template">
-    {[#each data]}
-    <tr class="tr_list">
-        {*<td>{[category]}</td>
-        <td>{[regdate]}</td>
-        <td>{[title]}</td>
-        <td>{[content]}</td>*}
-		<td>{[this.id]}</td>
-    </tr>
-    {[/each]}
+	<table class="table">
+		<thead>
+		<tr>
+			<th>카테고리</th>
+			<th>등록일</th>
+			<th>제목</th>
+			<th>내용</th>
+		</tr>
+		</thead>
+		<tbody>
+			{[#each result]}
+			<tr class="tr_list">
+				<td>{[category]}</td>
+				<td>{[regdate]}</td>
+				<td>{[title]}</td>
+				<td>{[content]}</td>
+			</tr>
+			{[/each]}
+		</tbody>
+	</table>
 </script>
-
-
-
-
 
 {#script}
 
@@ -80,35 +51,17 @@
         });
     });
 
-	/*$(function() {
-		var source = $("#some-template").html();
-		var template = Handlebars.compile(source);
-		var data={
-		  person: {
-			firstname: "Yehuda",
-			lastname: "Katz"
-		  }
-		};
-		$("#content-blog").html(template(data));
-
-		console.log(template(data));
-	});*/
-
+	//handlebar
     $(function() {
         var source = $("#blog-template").html();
         var template = Handlebars.compile(source);
-        var data = {row};
+        var data = {
+			result: {row}
+		};
 
         console.log(data);
 
-
-        var tpl = Handlebars.compile("hello {[name]}");
-        console.log(tpl({name:"world"}));
-
-
-        $("#content-blog").html(template(data));
-
-
+        $("#content-blog").append(template(data));
     });
 
 </script>
