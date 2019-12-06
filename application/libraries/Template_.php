@@ -13,7 +13,7 @@ class Template_
 
 	var $template_dir  = VIEWPATH . '/Template_/_template';
 	var $prefilter     = '';
-	var $postfilter    = '';
+	var $postfilter    = 'mustache';
 	var $permission    = 0777;
 	var $safe_mode     = false;
 	var $auto_constant = false;
