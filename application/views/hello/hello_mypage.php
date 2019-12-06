@@ -63,7 +63,7 @@
 				<tbody>
 				<?php foreach ($result as $row):?>
 
-					<tr>
+					<tr class="tr_list" code="<?=$row->id?>">
 						<td><?php echo $row->category;?></td>
 						<td><?php echo $row->regdate;?></td>
 						<td><?php echo $row->title;?></td>
@@ -92,6 +92,13 @@
         //글쓰기 버튼
         $('#btn_write').click(function(){
             location.href='http://localhost/Codeigniter3/hello/hello_write';
+        });
+
+        $('.tr_list').click(function(){
+            var id = $(this).attr('code');
+            console.log(id);
+
+            $(location).attr('href',"<?= site_url('/hello/hello_modify'); ?>/" + id);
         });
     });
 </script>

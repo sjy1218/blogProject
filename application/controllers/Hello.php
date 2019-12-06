@@ -33,13 +33,22 @@ class Hello extends CI_Controller {
 		$this->pagination->initialize($config);
 		$data['page'] = $this->pagination->create_links();
 
-		$data['result'] = $this->BlogModel->select_blog($limit,$offset);
+		$data['result'] = $this->BlogModel->select_blog($limit,$offset,'');
 		$this->load->view('/hello/hello_mypage',$data);
 	}
 
 	public function hello_write()
 	{
 		$this->load->view('/hello/hello_write');
+	}
+
+	public function hello_modify($id)
+	{
+//		if(empty($id) == false){
+//			$data['views'] = ;
+//		}
+
+		$this->load->view('/hello/hello_modify');
 	}
 
 	public function insert_writeForm()
