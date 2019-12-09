@@ -45,7 +45,7 @@
 	<div class="row">
 		<div class="col-md-12 .col-md-offset-6">
 
-			<form id="fform" action="/hello/insert_writeForm">
+			<form id="fform" action="/blog/insert_writeForm">
 				<div class="form-group">
 					<label for="category">카 테 고 리</label>
 					<select class="form-control" id="category" style="width: 30%">
@@ -63,7 +63,7 @@
 				</div>
 				<div class="form-group">
 					<label for="regdate">날 짜</label>
-					<input type="text" class="form-control" id="regdate" placeholder="날짜">
+					<input type="date" class="form-control" id="regdate">
 				</div>
 				<div class="form-group">
 					<label for="content">내 용</label>
@@ -86,6 +86,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+
 </body>
 </html>
 
@@ -98,7 +100,7 @@
             var content = $( "#content" ).val();
 
             $.ajax({
-                url: "<?=site_url('/tpl_exam/insert_writeForm'); ?>",
+                url: "<?=site_url('/blog/insert_writeForm'); ?>",
                 data: {
                     category: category,
                     title: title,
@@ -117,6 +119,9 @@
         $('#btn_cancel').click(function(){
             location.href='/Codeigniter3/blog/hello_mypage';
         });
+
+
+
     });
 
 </script>

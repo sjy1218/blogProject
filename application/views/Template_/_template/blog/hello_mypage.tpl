@@ -52,16 +52,35 @@
     });
 
 	//handlebar
-    $(function() {
-        var source = $("#blog-template").html();
-        var template = Handlebars.compile(source);
-        var data = {
-			result: {row}
-		};
+    {*$(function() {*}
+    {*    var source = $("#blog-template").html();*}
+    {*    var template = Handlebars.compile(source);*}
+    {*    var data = {*}
+	{*		result: {row}*}
+	{*	};*}
 
-        console.log(data);
+    {*    console.log(data);*}
 
-        $("#content-blog").append(template(data));
+    {*    $("#content-blog").append(template(data));*}
+    {*});*}
+
+
+    $(function(){
+        $.ajax({
+            url: "<?=site_url('/blog/list_mypage'); ?>",
+            dataType: "json",
+            success: function (data) {
+
+				var source = $("#blog-template").html();
+				var template = Handlebars.compile(source);
+				var row = {result: data};
+
+				// console.log(data);
+
+				$("#content-blog").append(template(row));
+
+            }
+        });
     });
 
 </script>

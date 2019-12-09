@@ -60,6 +60,7 @@ class Blog extends CI_Controller {
 		$this->pagination->initialize($config);
 		$page = $this->pagination->create_links();
 
+
 		//blog 테이블 전체데이터 가져오기
 		$result = $this->BlogModel->select_blog($limit,$offset,'');
 
@@ -74,12 +75,9 @@ class Blog extends CI_Controller {
 	}
 
 	//글쓰기
-	public function hello_write($id)
+	public function hello_write()
 	{
 		$this->tpl->define('write', 'blog/hello_write.tpl');
-
-		if(empty($id)==false){
-		}
 
 		$this->tpl->print_('write');
 	}
@@ -108,4 +106,19 @@ class Blog extends CI_Controller {
 		$this->session->set_userdata($data);
 		$this->hello_mypage();
 	}
+
+	public function list_mypage(){
+		$limit=3;
+		$offset = $this->session->userdata('offset');
+
+		if(empty($offset) == false) {
+			$offset = $this->session->userdata('offset');
+		}else{
+			$offset= 0;
+		}
+
+		$result = $this->BlogModel->select_blog($limit,$offset,'');
+		echo json_encode($result);
+	}
+
 }
